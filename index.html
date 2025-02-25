@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Meu Amor</title>
+    <style>
+        body {
+            background-color: purple;
+            color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #contador {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        .imagens-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .active {
+            display: block;
+            opacity: 1;
+        }
+        .seta {
+            cursor: pointer;
+            font-size: 2em;
+            color: white;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .seta-esquerda {
+            left: -70px;
+        }
+        .seta-direita {
+            right: -70px;
+        }
+        .seta:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.1);
+        }
+        @media (max-width: 600px) {
+            .seta {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+            .seta-esquerda {
+                left: -50px;
+            }
+            .seta-direita {
+                right: -50px;
+            }
+        }
+        .botao-musica {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: pink;
+            color: purple;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .botao-musica:hover {
+            background-color: lightpink;
+        }
+    </style>
+</head>
+<body>
+    <h1>Para Meu Amor 💜</h1>
+    <p>Estamos juntos há:</p>
+    <div id="contador"></div>
+
+    <div class="imagens-container">
+        <button class="seta seta-esquerda" onclick="mudarImagem(-1)">&#9665;</button>
+        <img id="img1" src="https://i.imgur.com/RBvZikX.jpg" alt="Foto do casal" class="active">
+        <img id="img2" src="https://i.imgur.com/xCMvdK7.jpg" alt="Foto do casal">
+        <img id="img3" src="https://i.imgur.com/hNkh2jV.jpg" alt="Foto do casal">
+        <button class="seta seta-direita" onclick="mudarImagem(1)">&#9655;</button>
+    </div>
+
+    <p>Meu amor, minha vida antes de você era apenas uma jornada sem destino. Mas, desde que você chegou, meu coração encontrou seu verdadeiro lar. Cada dia ao seu lado é um novo capítulo de uma história que eu jamais imaginei ser possível. O seu amor é a luz que ilumina meu caminho, e prometo que farei de tudo para ser a pessoa que você sempre mereceu. Você é minha razão de viver, e não importa o que o futuro nos reserve, eu sempre serei seu. Eu não tenho palavras para agradecer por cada sorriso, cada abraço, cada momento de felicidade que você me deu. Você transforma tudo o que toca em algo mágico e, com você, a vida tem um significado muito maior.
+Desde o momento em que nossos caminhos se cruzaram, algo dentro de mim mudou para sempre. 
+Tudo em você me encanta: seu sorriso, sua risada, o jeito que olha para mim, como se soubesse exatamente o que meu coração precisa.
+Cada dia ao seu lado é uma dádiva que eu nunca imaginei ser capaz de sentir. Você me ensina o que é o verdadeiro amor, algo tão puro e simples, mas ao mesmo tempo tão forte, que me faz querer estar perto de você a cada segundo.
+Quando estamos juntos, o tempo parece parar, e quando estamos longe, ele se arrasta, tentando se aproximar de mim, mas nunca é o suficiente.
+Você é o meu lar, a razão pela qual meus olhos brilham e meu coração bate mais forte. Eu te amo mais do que palavras podem expressar, e sei que esse amor será eterno, pois você é a minha alma. 💜</p>
+
+<p>"Nosso amor é forte o suficiente para nos levar para qualquer lugar, seja o que o futuro nos reserva. Não importa os desafios, tenho a certeza de que juntos seremos invencíveis."</p>
+
+    <audio id="musica" autoplay loop muted>
+        <source src="https://www.dropbox.com/scl/fi/r5z255p660czmx4ekcn4u/spotidownloader.com-Yebba-s-Heartbreak-Drake.mp3?rlkey=gqwb8qxev8cl2ji4rr6mdfjxc&raw=1" type="audio/mp3">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <button class="botao-musica" onclick="ativarSom()">🔊 Ativar Som</button>
+
+    <script>
+        function atualizarContador() {
+            const dataInicio = new Date("2024-10-02T18:30:00");
+            const agora = new Date();
+            const diferenca = agora - dataInicio;
+            const segundos = Math.floor(diferenca / 1000) % 60;
+            const minutos = Math.floor(diferenca / (1000 * 60)) % 60;
+            const horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            document.getElementById("contador").innerText = `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+        }
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+
+        let indiceImagem = 0;
+        const imagens = document.querySelectorAll('.imagens-container img');
+        function mudarImagem(direcao) {
+            imagens[indiceImagem].classList.remove('active');
+            indiceImagem = (indiceImagem + direcao + imagens.length) % imagens.length;
+            imagens[indiceImagem].classList.add('active');
+        }
+        mudarImagem(0);
+
+        // Ativar som após interação do usuário
+        window.addEventListener("click", function() {
+            let audio = document.getElementById("musica");
+            audio.muted = false;
+        });
+
+        function ativarSom() {
+            let audio = document.getElementById("musica");
+            audio.muted = false;
+            audio.play();
+        }
+    </script>
+</body>
+</html>
